@@ -6,11 +6,7 @@ using System.Text;
 
 namespace DataAccess.Abstract
 {
-    public interface IProductDal : IEntityRepository<Product>
+    public interface ICategoryDal : IEntityRepository<Category>
     {
-        //Listeleme
-        //Ekleme
-        //Silme
-        //Güncelleme
     }
 }
