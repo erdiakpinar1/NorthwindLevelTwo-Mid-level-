@@ -8,10 +8,12 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MvcWebUI.Helpers;
 
 namespace MvcWebUI
 {
@@ -31,6 +33,12 @@ namespace MvcWebUI
             services.AddSingleton<IProductDal, EfProductDal>();
             services.AddSingleton<ICategoryService, CategoryManager>();
             services.AddSingleton<ICategoryDal, EfCategoryDal>();
+            // Alttaki yapýda eðer singleton verseydim bütün kullanýcýlarýn sepetinde ayný ürünler olurdu çünkü singleton 1 instance oluþturuyor scoped her bir kullanýcý için ayrý instance oluþturuyor.
+            services.AddScoped<ICartService, CartManager>();
+            services.AddScoped<ICartSessionHelper, CartSessionHelper>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSession();
+
             services.AddControllersWithViews();
         }
 
@@ -51,6 +59,8 @@ namespace MvcWebUI
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 
