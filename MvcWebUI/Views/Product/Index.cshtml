@@ -1,19 +1,30 @@
 ﻿@model ProductListViewModel
-@{ 
+@{
     ViewBag.Title = "Title";
     Layout = "_Layout";
 }
 
 <h2>Product List</h2>
 <table class="table table-striped">
-    @foreach (var product in Model.Products)
-    {
+    <thead>
         <tr>
-            <td>@product.ProductId</td>
-            <td>@product.ProductName</td>
-            <td>@product.QuantityPerUnit</td>
-            <td>@product.UnitsInStock</td>
-            <td>@product.UnitPrice</td>
+            <th>Id</th>
+            <th>Product Name</th>
+            <th>Quantity Per Unit</th>
+            <th>Units In Stock</th>
+            <th>Unit Price</th>
         </tr>
-    }
-</table>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.QuantityPerUnit</td>
+                <td>@product.UnitsInStock</td>
+                <td>@product.UnitPrice</td>
+            </tr>
+        }
+    </tbody>
+ </table>
