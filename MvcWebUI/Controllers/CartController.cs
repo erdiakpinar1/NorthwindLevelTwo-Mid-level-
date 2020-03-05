@@ -34,7 +34,9 @@ namespace MvcWebUI.Controllers
 
             _cartSessionHelper.SetCart("cart", cart);
 
-            return RedirectToAction("Index", "Product");
+            TempData.Add("message", product.ProductName + " sepete eklendi.");
+
+            return RedirectToAction("Index", "cart");
         }
 
         public IActionResult RemoveFromCart(int productId)
@@ -47,7 +49,9 @@ namespace MvcWebUI.Controllers
             
             _cartSessionHelper.SetCart("cart", cart);
 
-            return RedirectToAction("Index", "Product");
+            TempData.Add("message", product.ProductName + " sepeten silindi.");
+
+            return RedirectToAction("Index", "cart");
         }
         public IActionResult Index()
         {
@@ -57,6 +61,25 @@ namespace MvcWebUI.Controllers
             };
 
             return View(model);
+        }
+
+        public IActionResult Complete()
+        {
+            var model = new ShippingDetailsViewModel
+            {
+                ShippingDetail = new ShippingDetail()
+            };
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Complete(ShippingDetail shippingDetail)
+        {
+            TempData.Add("message", "Siparişiniz Başarıyla Tamamlandı");
+            
+            _cartSessionHelper.Clear();
+
+            return RedirectToAction("Index", "Cart");
         }
     }
 }

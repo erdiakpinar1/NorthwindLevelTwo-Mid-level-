@@ -1,0 +1,29 @@
+﻿@model ShippingDetailsViewModel
+
+@{ 
+    Layout = "_Layout";
+}
+
+    <form asp-controller="Cart" asp-action="Complete" method="post">
+        <div class="form-group">
+            <label asp-for="ShippingDetail.Name">İsim:</label>
+            <input asp-for="ShippingDetail.Name" class="form-control" placeholder="Müşteri Adı" />
+        </div>
+        <div class="form-group">
+            <label asp-for="ShippingDetail.LastName">Soyisim:</label>
+            <input asp-for="ShippingDetail.LastName" class="form-control" placeholder="Müşteri Soyisimi" />
+        </div>
+        <div class="form-group">
+            <label asp-for="ShippingDetail.Email">Email:</label>
+            <input asp-for="ShippingDetail.Email" class="form-control" placeholder="E-Posta" />
+        </div>
+        <div class="form-group">
+            <label asp-for="ShippingDetail.City">Şehir:</label>
+            <input asp-for="ShippingDetail.Name" class="form-control" placeholder="Şehir" />
+        </div>
+        <div class="form-group">
+            <label asp-for="ShippingDetail.Address">Adres:</label>
+            <input asp-for="ShippingDetail.Name" class="form-control" placeholder="Adres" />
+        </div>
+        <input type="submit" value="Kaydet" class="btn btn-success btn-group-sm" />
+    </form>

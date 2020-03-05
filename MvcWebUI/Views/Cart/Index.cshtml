@@ -1,36 +1,46 @@
 ﻿@model CartListViewModel
 
-@{ 
+@{
     Layout = "_Layout";
 }
 
 
 <h2>Cart List</h2>
 
-<table class="table table-responsive">
-    <theat>
-        <tr>
-            <th>Product Id</th>
-            <th>Product Name</th>
-            <th>Product Quantity Per Unit</th>
-            <th>Product Units In Stock</th>
-            <th>Product Unit Price</th>
-            <th>Product Quantity</th>
-            <th>Take off</th>
-        </tr>
-    </theat>
-    <tbody>
-        @foreach (var cartLine in Model.Cart.CartLines)
-        {
+@if (Model.Cart.CartLines.Count == 0)
+{
+    <h2 class="badge badge-danger">Sepetiniz Boş</h2>
+}
+else
+{
+    <table class="table table-responsive">
+        <theat>
             <tr>
-                <td>@cartLine.Product.ProductId</td>
-                <td>@cartLine.Product.ProductName</td>
-                <td>@cartLine.Product.QuantityPerUnit</td>
-                <td>@cartLine.Product.UnitsInStock</td>
-                <td>@cartLine.Product.UnitPrice</td>
-                <td>@cartLine.Quantity</td>
-                <td><a class="btn btn-warning btn-sm" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@cartLine.Product.ProductId">Sepetten Çıkar</a></td>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Product Quantity Per Unit</th>
+                <th>Product Units In Stock</th>
+                <th>Product Unit Price</th>
+                <th>Product Quantity</th>
+                <th>Take off</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </theat>
+        <tbody>
+            @foreach (var cartLine in Model.Cart.CartLines)
+            {
+                <tr>
+                    <td>@cartLine.Product.ProductId</td>
+                    <td>@cartLine.Product.ProductName</td>
+                    <td>@cartLine.Product.QuantityPerUnit</td>
+                    <td>@cartLine.Product.UnitsInStock</td>
+                    <td>@cartLine.Product.UnitPrice</td>
+                    <td>@cartLine.Quantity</td>
+                    <td><a class="btn btn-warning btn-sm" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@cartLine.Product.ProductId">Sepetten Çıkar</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
